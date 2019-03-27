@@ -1,0 +1,20 @@
+[
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Purchase Invoice", 
+  "modified": "2019-03-27 13:10:28.810540", 
+  "name": "Purchase Invoice-Client", 
+  "script": "frappe.ui.form.on(\"Purchase Invoice\", {\n\n    validate: function(frm, cdt, cdn) {\n\n      if (frm.doc.makwiz_warehouse){\n      $.each(frm.doc.items, function(index,row){\n\n        row.warehouse = frm.doc.makwiz_warehouse ;\n\n      });\n      }\n    },\n    before_submit: function(frm, cdt, cdn) {\n\n    $.each(frm.doc.items, function(index,row){\n\n      if ((parseFloat(row.makwiz_qty)) == (parseInt(row.makwiz_qty))){\n\n\n        var d = locals[cdt][cdn];\n\n        var value = 1 / (row.qty/row.makwiz_qty) ;\n        row.stock_qty = parseInt(row.makwiz_qty);\n        row.conversion_factor = value ;\n\n\n      }else{\n\n      alert(\"Nos must be integer.\");\n\n      }\n\n\n    });\n\n\n}\n\n});", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Sales Invoice", 
+  "modified": "2019-03-27 13:07:16.601501", 
+  "name": "Sales Invoice-Client", 
+  "script": "frappe.ui.form.on(\"Sales Invoice\", {\n\n    validate: function(frm, cdt, cdn) {\n\n      if (frm.doc.makwiz_warehouse){\n      $.each(frm.doc.items, function(index,row){\n\n        row.warehouse = frm.doc.makwiz_warehouse ;\n\n      });\n      }\n    },\n    before_submit: function(frm, cdt, cdn) {\n\n    $.each(frm.doc.items, function(index,row){\n\n      if ((parseFloat(row.makwiz_qty)) == (parseInt(row.makwiz_qty))){\n\n\n        var d = locals[cdt][cdn];\n\n        var value = 1 / (row.qty/row.makwiz_qty) ;\n        row.stock_qty = parseInt(row.makwiz_qty);\n        row.conversion_factor = value ;\n\n\n      }else{\n\n      alert(\"Nos must be integer.\");\n\n      }\n\n\n    });\n\n\n}\n\n});", 
+  "script_type": "Client"
+ }
+]
